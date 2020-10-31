@@ -19,6 +19,7 @@ body {
   line-height: 1.4;
   margin: 0;
   color: #2a2a2a;
+  background: #ffecf5;
 }
 h1,
 h2,
@@ -52,9 +53,5 @@ td {
 .main {
   width: 100%;
   margin: 0 auto;
-  flex: 1;
 }
-
-/* .container {
-} */
 </style>

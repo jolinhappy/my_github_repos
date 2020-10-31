@@ -6,9 +6,9 @@
       <table class="main-table">
         <thead class="table-header">
           <tr class="table-header-list">
-            <th class="table-header-title">name</th>
-            <th class="table-header-title">discription</th>
-            <th class="table-header-title">link</th>
+            <th class="table-header-title header-name">name</th>
+            <th class="table-header-title header-description">discription</th>
+            <th class="table-header-title header-link">link</th>
           </tr>
         </thead>
         <tbody class="table-body">
@@ -17,11 +17,11 @@
             v-for="repo in currentRenderRepos"
             :key="repo.id"
           >
-            <td class="table-content-name">{{ repo.name }}</td>
-            <td class="table-content-description">
+            <td class="table-content-name body-name">{{ repo.name }}</td>
+            <td class="table-content-description body-description">
               {{ repo.description | descriptionFilter }}
             </td>
-            <td class="table-content-link">
+            <td class="table-content-link body-link">
               <a :href="repo.html_url">{{ repo.html_url }}</a>
             </td>
           </tr>
@@ -112,6 +112,7 @@ export default {
   font-weight: 700;
   margin-top: 15px;
   margin-bottom: 10px;
+  color: #484891;
 }
 .repo-table {
   width: 80%;
@@ -120,30 +121,84 @@ export default {
 
 .main-table {
   width: 100%;
-  height: auto;
+  height: 90%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin-bottom: 60px;
+  box-shadow: 2px 5px 10px gray;
 }
 .table-header {
   background: #5a5aad;
   color: #ffffff;
 }
-.table-header-list {
-  height: 50px;
+.table-body {
+  background: #ffffff;
 }
-
+.table-header-list,
 .table-body-list {
   height: 50px;
 }
+
 th,
 td {
-  padding-left: 10px;
+  font-size: 5px;
+  border: #5a5aad 1px solid;
 }
-tr {
-  border: turquoise 1px solid;
+th {
+  text-align: center;
+}
+td {
+  padding-left: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-name,
+.body-name {
+  width: 50px;
+}
+.header-description,
+.body-description {
+  width: 100px;
+}
+
+.header-link,
+.body-link {
+  width: 60px;
+}
+
+.body-link:hover {
+  text-decoration: underline;
+  color: blue;
 }
 
 @media screen and (min-width: 768px) {
   .table-title {
     font-size: 35px;
+  }
+
+  .header-name,
+  .body-name {
+    width: 300px;
+  }
+  .header-description,
+  .body-description {
+    width: 500px;
+  }
+
+  .header-link,
+  .body-link {
+    width: 350px;
+  }
+
+  th,
+  td {
+    font-size: 15px;
+  }
+
+  .table-header-list,
+  .table-body-list {
+    height: 60px;
   }
 }
 </style>
