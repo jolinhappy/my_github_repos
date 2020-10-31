@@ -5,27 +5,23 @@
       <div class="profile-title">My profile</div>
       <div class="prfile-card">
         <div class="img-part">
-          <img
-            src="https://avatars0.githubusercontent.com/u/58591365?v=4"
-            alt=""
-            class="profile-img"
-          />
+          <img :src="profile.avatar" alt="" class="profile-img" />
         </div>
-        <div class="name">jolin</div>
-        <div class="account">jolin123</div>
-        <div class="bio">hihi</div>
+        <div class="name">{{ profile.name }}</div>
+        <div class="account">{{ profile.account }}</div>
+        <div class="bio">{{ profile.bio }}</div>
         <div class="followship">
           <font-awesome-icon icon="users" class="followship-icon" />
           <div class="followers">
-            <strong>100</strong> <span>followers</span>
+            <strong>{{ profile.followers }}</strong> <span>followers</span>
           </div>
           <div class="followings">
-            ．<strong>30</strong> <span>followings</span>
+            ．<strong>{{ profile.following }}</strong> <span>following</span>
           </div>
         </div>
         <div class="blog">
           <font-awesome-icon icon="link" class="blog-icon" />
-          <a href="#" class="blog-link">WWW</a>
+          <a :href="profile.blog" class="blog-link">{{ profile.blog }}</a>
         </div>
       </div>
     </div>
@@ -34,10 +30,41 @@
 
 <script>
 import Navbar from ".././components/Navbar";
+import profileAPI from ".././apis/profile";
 export default {
   name: "Profile",
   components: {
     Navbar,
+  },
+  data() {
+    return {
+      profile: {
+        avatar: "",
+        name: "",
+        account: "",
+        bio: "",
+        followers: "",
+        following: "",
+        blog: "",
+      },
+    };
+  },
+  created() {
+    this.fetchProfle();
+  },
+  methods: {
+    async fetchProfle() {
+      const { data } = await profileAPI.getProfile();
+      this.profile = {
+        avatar: data.avatar_url,
+        name: data.name,
+        account: data.login,
+        bio: data.bio,
+        followers: data.followers,
+        following: data.following,
+        blog: data.blog,
+      };
+    },
   },
 };
 </script>
@@ -52,7 +79,7 @@ export default {
   color: #484891;
 }
 .my-profile {
-  width: 80%;
+  width: 430px;
   margin: auto;
 }
 .prfile-card {
@@ -79,6 +106,8 @@ export default {
 }
 .account {
   font-size: 15px;
+  margin-top: -5px;
+  margin-bottom: 7px;
 }
 .bio {
   font-size: 13px;
@@ -106,6 +135,11 @@ export default {
 .blog-link {
   font-size: 15px;
 }
+.blog-link:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
 @media screen and (min-width: 768px) {
   .profile-title {
     font-size: 35px;
