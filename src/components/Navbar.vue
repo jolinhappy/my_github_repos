@@ -7,7 +7,7 @@
     <nav class="nav">
       <ul class="nav-list">
         <li class="nav-item">
-          <router-link to="/" class="nav-link">My Repo</router-link>
+          <router-link to="/" class="nav-link">My Repos</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/profile" class="nav-link">My Profile</router-link>
