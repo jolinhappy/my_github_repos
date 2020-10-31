@@ -37,7 +37,7 @@ export default {
 
 <style scoped>
 .table-title {
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 700;
   margin-top: 15px;
   margin-bottom: 10px;
@@ -63,5 +63,11 @@ export default {
 th,
 td {
   padding-left: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .table-title {
+    font-size: 35px;
+  }
 }
 </style>

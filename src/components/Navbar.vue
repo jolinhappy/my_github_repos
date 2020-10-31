@@ -114,4 +114,29 @@
 .hamburger::after {
   top: -8px;
 }
+
+@media screen and (min-width: 768px) {
+  .navbar-toggle-label {
+    display: none;
+  }
+  .nav {
+    all: unset;
+  }
+  #navbar {
+    display: flex;
+    justify-content: space-around;
+  }
+  .nav-list {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .nav-item {
+    margin: 0;
+    opacity: 1;
+    margin-left: 30px;
+    font-size: 23px;
+  }
+}
 </style>
