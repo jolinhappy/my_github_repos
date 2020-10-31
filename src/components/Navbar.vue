@@ -1,16 +1,16 @@
 <template>
   <div id="navbar">
     <div class="nav-title">
-      <a href="#">My GitHub Data</a>
+      <router-link to="/">My GitHub Data</router-link>
     </div>
     <input type="checkBox" class="navbar-toggle" id="navbar-toggle" />
     <nav class="nav">
       <ul class="nav-list">
         <li class="nav-item">
-          <a href="#" class="nav-link">my repo</a>
+          <router-link to="/" class="nav-link">My Repo</router-link>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">my profile</a>
+          <router-link to="/profile" class="nav-link">My Profile</router-link>
         </li>
       </ul>
     </nav>
@@ -70,6 +70,10 @@
   font-size: 25px;
   line-height: 60px;
   text-align: center;
+}
+
+.nav-link:hover {
+  color: #c7c7e2;
 }
 
 .navbar-toggle-label {

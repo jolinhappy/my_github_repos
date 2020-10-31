@@ -2,7 +2,7 @@
   <div class="container">
     <Navbar />
     <div class="repo-table">
-      <div class="table-title">My repos</div>
+      <div class="table-title">My Repos</div>
       <table class="main-table">
         <thead class="table-header">
           <tr class="table-header-list">

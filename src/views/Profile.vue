@@ -2,7 +2,7 @@
   <div class="container">
     <Navbar />
     <div class="my-profile">
-      <div class="profile-title">My profile</div>
+      <div class="profile-title">My Profile</div>
       <div class="prfile-card">
         <div class="img-part">
           <img :src="profile.avatar" alt="" class="profile-img" />
