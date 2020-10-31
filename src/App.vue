@@ -31,8 +31,26 @@ p {
   padding: 0px;
 }
 
+ul,
+ol,
+li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: unset;
+}
+th,
+td {
+  text-align: initial;
+}
+
 .main {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   flex: 1;
 }
