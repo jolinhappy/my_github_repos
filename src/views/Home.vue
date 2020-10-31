@@ -12,11 +12,17 @@
           </tr>
         </thead>
         <tbody class="table-body">
-          <tr class="table-body-list">
-            <td class="table-content-name">123</td>
-            <td class="table-content-description">1234</td>
+          <tr
+            class="table-body-list"
+            v-for="repo in currentRenderRepos"
+            :key="repo.id"
+          >
+            <td class="table-content-name">{{ repo.name }}</td>
+            <td class="table-content-description">
+              {{ repo.description | descriptionFilter }}
+            </td>
             <td class="table-content-link">
-              <a href="#">url</a>
+              <a :href="repo.html_url">{{ repo.html_url }}</a>
             </td>
           </tr>
         </tbody>
@@ -27,10 +33,75 @@
 
 <script>
 import Navbar from ".././components/Navbar";
+import reposAPI from ".././apis/repo";
+
 export default {
   name: "Home",
   components: {
     Navbar,
+  },
+  data() {
+    return {
+      myTotalRepos: [],
+      currentRenderRepos: [],
+      perLoadingReposCount: 10,
+      totalRenderCounts: null,
+      currentLoadingCount: 0,
+    };
+  },
+  created() {
+    this.fetchRepos();
+    window.addEventListener(
+      "scroll",
+      () => {
+        this.scroll();
+      },
+      true
+    );
+  },
+  methods: {
+    async fetchRepos() {
+      const { data } = await reposAPI.getRepos();
+      this.myTotalRepos = data;
+      this.getLoadingCount(this.myTotalRepos);
+      this.loadingRepos();
+    },
+    getLoadingCount(myTotalRepos) {
+      this.totalRenderCounts =
+        Math.ceil(myTotalRepos.length / this.perLoadingReposCount) || 1;
+    },
+    loadingRepos() {
+      this.currentLoadingCount++;
+      if (this.myTotalRepos.length === 0) {
+        return "沒有相關資料";
+      } else if (this.currentLoadingCount > this.totalRenderCounts) {
+        return;
+      } else if (this.currentLoadingCount === this.totalRenderCounts) {
+        let start = (this.currentLoadingCount - 1) * this.perLoadingReposCount;
+        let pushData = this.myTotalRepos.slice(start, this.myTotalRepos.length);
+        this.currentRenderRepos.push(...pushData);
+      } else {
+        let start = (this.currentLoadingCount - 1) * this.perLoadingReposCount;
+        let pushData = this.myTotalRepos.slice(
+          start,
+          start + this.perLoadingReposCount
+        );
+        this.currentRenderRepos.push(...pushData);
+      }
+    },
+    scroll() {
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const scrollY = window.scrollY;
+      if (scrollY + visible > pageHeight) {
+        this.loadingRepos();
+      }
+    },
+  },
+  filters: {
+    descriptionFilter(text) {
+      return text === null ? "-" : text;
+    },
   },
 };
 </script>
@@ -54,15 +125,20 @@ export default {
 .table-header {
   background: #5a5aad;
   color: #ffffff;
-  border: solid 1px red;
+}
+.table-header-list {
+  height: 50px;
 }
 
-.table-body {
-  border: solid 1px red;
+.table-body-list {
+  height: 50px;
 }
 th,
 td {
-  padding-left: 5px;
+  padding-left: 10px;
+}
+tr {
+  border: turquoise 1px solid;
 }
 
 @media screen and (min-width: 768px) {
